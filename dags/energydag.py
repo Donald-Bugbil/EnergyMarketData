@@ -50,8 +50,20 @@ def energy_worflow():
             task_logger.warning(f'Can not connect to s3')
             return None
         
+    @task()
+    def transform(data_frame):
+        new_data_frame=data_frame
+
+        # Convert the 'date' column to datetime format
+        new_data_frame['date']=pd.to_datetime(new_data_frame['date']) 
+        
+        # Round all numeric columns to 2 decimal places
+        new_data_frame = new_data_frame.round(2)
+        return new_data_frame
+        
     starting_database=database_initialization()
     extraction=extract()
+    transformation=transform(extraction)
 energy_worflow()
         
    
