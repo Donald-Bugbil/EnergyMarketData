@@ -10,7 +10,7 @@ Base=declarative_base()
  generation, emissions, and market price data
 """
 class Electric(Base):
-    __tablename__='Electricity'
+    __tablename__='electricity_data'
     id=Column(Integer, primary_key=True, autoincrement=True)
     date=Column(DateTime)
     battery_charging_mv=Column(Float)
